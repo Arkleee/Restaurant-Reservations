@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS reservasdb;
+USE reservasdb;
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
+    senha VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS mesa (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    lugares INT NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS reserva (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    datahora DATETIME NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    usuario_id BIGINT NOT NULL,
+    mesa_id BIGINT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+    FOREIGN KEY (mesa_id) REFERENCES mesa(id)
+); 
